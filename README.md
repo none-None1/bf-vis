@@ -21,5 +21,8 @@ Keyboard Shortcuts:
 3. Ctrl+O: Open file.
 4. Ctrl+B: Abort.
 
+Required packages:
+1. Pillow
+
 As it's shown above, it automatically highlights the running code and the input which the code is reading, it also shows the cells and the pointer.
 

@@ -95,6 +95,8 @@ class GUI:
         if not self.vm.running():
             self.tk.title('It\'s a Brainfuck Visualizer! - Not Running')
             self.running=False
+            self.code_editor.tag_remove('running-cmd', '1.0', END)
+            self.input_editor.tag_remove('running-cmd', '1.0', END)
             return
         if not self.running:
             return

@@ -137,7 +137,7 @@ class GUI:
                 return
             else:
                 self.abort()
-        fp=tfd.askopenfilename(title='Open a Brainfuck file',filetypes=[('Brainfuck file .b','.b'),('Brainfuck file .f','.bf'),('All Files','.*')],initialdir='.')
+        fp=tfd.askopenfilename(title='Open a Brainfuck file',filetypes=[('Brainfuck file .b','.b'),('Brainfuck file .bf','.bf'),('All Files','.*')],initialdir='.')
         if not fp.strip():
             return
         try:

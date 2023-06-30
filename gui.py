@@ -103,6 +103,10 @@ class GUI:
             self.input_editor.tag_remove('running-cmd', '1.0', END)
             return
         if not self.running:
+            self.tk.title('It\'s a Brainfuck Visualizer! - Not Running')
+            self.running = False
+            self.code_editor.tag_remove('running-cmd', '1.0', END)
+            self.input_editor.tag_remove('running-cmd', '1.0', END)
             return
         self.code_editor.tag_add('running-cmd','1.0+'+str(self.vm.pos)+'c','1.0+' + str(self.vm.pos+1)+'c')
         self.input_editor.tag_add('running-cmd', '1.0+'+str(len(self.input)-len(self.vm.input))+'c', '1.0+'+str(len(self.input)-len(self.vm.input)+1)+'c')

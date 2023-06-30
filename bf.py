@@ -24,9 +24,13 @@ class BrainFuck():
             if j == '[':
                 stack.append(i)
             if j==']':
+                if not stack:
+                    raise Exception('Unmatched ] at char '+str(i))
                 par=stack.pop()
                 self.matches[par]=i
                 self.matches[i] = par
+        if stack:
+            raise Exception('Unmatched [ at char '+str(stack[-1]))
     def step(self):
         cmd=self.command[self.pos]
         if cmd == '+':
@@ -37,7 +41,7 @@ class BrainFuck():
             self.cell[self.p] %= 256
         if cmd=='<':
             if self.p==0:
-                raise Exception
+                raise Exception('Cannot move to left of origin')
             self.p-=1
         if cmd=='>':
             self.p+=1

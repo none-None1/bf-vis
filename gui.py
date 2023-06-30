@@ -87,10 +87,14 @@ class GUI:
     def run(self):
         self.tk.title('It\'s a Brainfuck Visualizer! - Running')
         self.initrun()
-        self.vm.load(self.code.strip(),self.input)
+        try:
+            self.vm.load(self.code.strip(), self.input)
+        except Exception as core_error:
+            tmb.showerror('It\'s a Brainfuck Visualizer! - Error','Brainfuck VM Error - '+str(core_error))
+            self.abort()
     def step(self):
         if not self.running:
-            tmb.showerror('It\'s a Brainfuck Visualizer - Error','You cannot step when not running!')
+            tmb.showerror('It\'s a Brainfuck Visualizer! - Error','You cannot step when not running!')
             return
         if not self.vm.running():
             self.tk.title('It\'s a Brainfuck Visualizer! - Not Running')
@@ -102,7 +106,11 @@ class GUI:
             return
         self.code_editor.tag_add('running-cmd','1.0+'+str(self.vm.pos)+'c','1.0+' + str(self.vm.pos+1)+'c')
         self.input_editor.tag_add('running-cmd', '1.0+'+str(len(self.input)-len(self.vm.input))+'c', '1.0+'+str(len(self.input)-len(self.vm.input)+1)+'c')
-        self.vm.step()
+        try:
+            self.vm.step()
+        except Exception as core_error:
+            tmb.showerror('It\'s a Brainfuck Visualizer! - Error','Brainfuck VM Error - '+str(core_error))
+            self.abort()
         self.upcell()
         self.code_editor.tag_remove('running-cmd','1.0',END)
         self.input_editor.tag_remove('running-cmd', '1.0', END)
@@ -124,7 +132,7 @@ class GUI:
                 self.active_label[i].set(str(self.vm.cell[i]))
     def abort(self):
         if not self.running:
-            tmb.showerror('It\'s a Brainfuck Visualizer - Error','You cannot abort when not running!')
+            tmb.showerror('It\'s a Brainfuck Visualizer! - Error','You cannot abort when not running!')
             return
         self.tk.title('It\'s a Brainfuck Visualizer! - Not Running')
         self.running=False
@@ -132,7 +140,7 @@ class GUI:
         self.input_editor.tag_remove('running-cmd', '1.0', END)
     def openfile(self):
         if self.running:
-            result=tmb.askyesno('It\'s a Brainfuck Visualizer - Confirm','The visualizer is running some code.\nAbort and open the file?')
+            result=tmb.askyesno('It\'s a Brainfuck Visualizer! - Confirm','The visualizer is running some code.\nAbort and open the file?')
             if result==NO:
                 return
             else:
@@ -145,6 +153,6 @@ class GUI:
                 self.code_editor.delete('1.0',END)
                 self.code_editor.insert(END,f.read())
         except BaseException as e:
-            tmb.showerror('It\'s a Brainfuck Visualizer - Error','Can\'t open file, error is '+str(e))
+            tmb.showerror('It\'s a Brainfuck Visualizer! - Error','Can\'t open file, error is '+str(e))
     def copy(self):
         self.output_display.clipboard_append(self.output_display.get('1.0',END))

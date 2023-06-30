@@ -115,6 +115,7 @@ class GUI:
         except Exception as core_error:
             tmb.showerror('It\'s a Brainfuck Visualizer! - Error','Brainfuck VM Error - '+str(core_error))
             self.abort()
+            return
         self.upcell()
         self.code_editor.tag_remove('running-cmd','1.0',END)
         self.input_editor.tag_remove('running-cmd', '1.0', END)

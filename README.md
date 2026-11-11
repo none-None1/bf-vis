@@ -19,7 +19,8 @@ Keyboard Shortcuts:
 1. Ctrl+R: Run.
 2. Ctrl+S: Step.
 3. Ctrl+O: Open file.
-4. Ctrl+B: Abort.
+4. Ctrl+N: Next breakpoint (Use `#` to set a breakpoint).
+5. Ctrl+B: Abort.
 
 Required packages:
 1. Pillow
